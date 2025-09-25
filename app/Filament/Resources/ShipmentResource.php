@@ -112,9 +112,6 @@ class ShipmentResource extends Resource
                 Tables\Columns\TextColumn::make('shipment_receiver'),
                 Tables\Columns\TextColumn::make('shipment_origin'),
                 Tables\Columns\TextColumn::make('shipment_destination'),
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
             ])
             ->filters([
                 //
