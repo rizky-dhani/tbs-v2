@@ -6,6 +6,8 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use Filament\Enums\ThemeMode;
+use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Http\Middleware\Authenticate;
@@ -27,8 +29,18 @@ class DashboardPanelProvider extends PanelProvider
             ->default()
             ->id('dashboard')
             ->path('dashboard')
+            ->spa()
+            ->profile()
+            ->userMenuItems([
+                'profile' => MenuItem::make()->label('Edit Profile')
+            ])
+            ->defaultThemeMode(ThemeMode::Light)
+            ->brandLogo(asset('images/logo-tbs_converted.webp'))
+            ->brandLogoHeight('3rem')
             ->login()
             ->maxContentWidth(MaxWidth::Full)
+            ->unsavedChangesAlerts()
+            ->databaseTransactions()
             ->colors([
                 'primary' => Color::Blue,
             ])
