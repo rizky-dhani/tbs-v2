@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Public\ShipmentIndex;
 use App\Livewire\Public\ShipmentDetail;
 
-Route::get('/', function(){
+Route::get('/login', function(){
     return redirect('/dashboard/login');
 });
 Route::get('/tracking', ShipmentIndex::class)->name('shipments.public.search');
