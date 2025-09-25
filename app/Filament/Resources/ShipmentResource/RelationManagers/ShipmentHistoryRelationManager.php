@@ -66,7 +66,7 @@ class ShipmentHistoryRelationManager extends RelationManager
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Updated At')
-                    ->dateTime(),
+                    ->dateTime('j F Y H:i:s', 'Asia/Jakarta'),
             ])
             ->filters([
                 //
@@ -74,11 +74,14 @@ class ShipmentHistoryRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->color('success')
-                    ->label('New Shipment History'),
+                    ->label('New Shipment History')
+                    ->successNotificationTitle('Shipment History berhasil ditambahkan!'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->successNotificationTitle('Shipment History berhasil diupdate!'),
+                Tables\Actions\DeleteAction::make()
+                    ->successNotificationTitle('Shipment History berhasil dihapus!'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

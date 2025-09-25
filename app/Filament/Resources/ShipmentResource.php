@@ -93,7 +93,7 @@ class ShipmentResource extends Resource
                                     ->label('Latest Shipment Detail'),
                                 TextEntry::make('latestHistory.created_at')
                                     ->label('Latest Shipment Status Update')
-                                    ->dateTime(),
+                                    ->dateTime('j F Y H:i:s', 'Asia/Jakarta'),
                             ])
                             ->columns(5),
                     ])
@@ -119,14 +119,51 @@ class ShipmentResource extends Resource
                     ->label('Origin'),
                 Tables\Columns\TextColumn::make('shipment_destination')
                     ->label('Destination'),
+                Tables\Columns\TextColumn::make('latestHistory.shipment_status')
+                    ->label('Status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'on_process' => 'info',
+                        'delivered' => 'success',
+                        'on_transit' => 'primary',
+                        'cancelled' => 'danger',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'pending' => 'PENDING',
+                        'on_process' => 'ON PROCESS',
+                        'delivered' => 'DELIVERED',
+                        'on_transit' => 'ON TRANSIT',
+                        'cancelled' => 'CANCELLED',
+                        default => 'UNKNOWN',
+                    }),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('shipment_status')
+                    ->label('Shipment Status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'on_process' => 'On Process',
+                        'delivered' => 'Delivered',
+                        'on_transit' => 'On Transit',
+                        'cancelled' => 'Cancelled',
+                    ])
+                    ->query(function ($query, array $data) {
+                        if ($data['value']) {
+                            return $query->whereHas('latestHistory', function ($query) use ($data) {
+                                $query->where('shipment_status', $data['value']);
+                            });
+                        }
+                        return $query;
+                    }),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                ->successNotificationTitle('Shipment berhasil diupdate!'),
+                Tables\Actions\DeleteAction::make()
+                ->successNotificationTitle('Shipment berhasil dihapus!'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
