@@ -51,4 +51,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function shipment()
+    {
+        return $this->HasMany(Shipment::class, 'user_id');
+    }
 }
