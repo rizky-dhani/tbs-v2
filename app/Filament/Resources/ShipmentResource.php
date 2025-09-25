@@ -103,6 +103,7 @@ class ShipmentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn($query) => $query->orderByDesc('created_at'))
             ->columns([
                 Tables\Columns\TextColumn::make('shipment_number')
                     ->label('AWB Number')
