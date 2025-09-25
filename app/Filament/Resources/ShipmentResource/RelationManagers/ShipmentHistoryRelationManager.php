@@ -43,6 +43,8 @@ class ShipmentHistoryRelationManager extends RelationManager
             ->recordTitleAttribute('shipment_status')
             ->modifyQueryUsing(fn($query) => $query->orderByDesc('created_at'))
             ->columns([
+                Tables\Columns\TextColumn::make('shipment_details')
+                    ->label('Shipment Details'),
                 Tables\Columns\TextColumn::make('shipment_status')
                     ->label('Shipment Status')
                     ->badge()
@@ -62,8 +64,6 @@ class ShipmentHistoryRelationManager extends RelationManager
                         'cancelled' => 'CANCELLED',
                         default => 'gray',
                     }),
-                Tables\Columns\TextColumn::make('shipment_details')
-                    ->label('Shipment Details'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Updated At')
                     ->dateTime(),

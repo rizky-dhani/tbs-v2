@@ -6,7 +6,7 @@
             <!-- Logo Section -->
             <div class="flex justify-center py-6">
                 <div class="logo text-center">
-                    <img src="{{ asset('images/logo-tbs_converted.webp') }}" alt="Logo" class="img-fluid max-w-[35%] mx-auto">
+                    <img src="{{ asset('images/logo-tbs_converted.webp') }}" alt="Logo" class="img-fluid max-w-[100%] mx-auto">
                 </div>
             </div>
             <!-- Search Card -->
@@ -28,9 +28,9 @@
                         <table class="table table-zebra table-sm md:table-md w-full">
                             <thead>
                                 <tr>
-                                    <th class="text-center">{{ __('Nomor Resi') }}</th>
-                                    <th class="text-center">{{ __('Status') }}</th>
-                                    <th class="text-center">{{ __('Aksi') }}</th>
+                                    <th class="text-base-content text-center">{{ __('Nomor Resi') }}</th>
+                                    <th class="text-base-content text-center">{{ __('Status') }}</th>
+                                    <th class="text-base-content text-center">{{ __('Aksi') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,7 @@
                                         </td>
                                         <td class="text-center">
                                             <a href="{{ route('shipments.show', $ship->shipmentId) }}"
-                                                class="btn btn-primary btn-sm">
+                                                class="btn btn-primary btn-sm btn-radius-field">
                                                 {{ __('Detail') }}
                                             </a>
                                         </td>

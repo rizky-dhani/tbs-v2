@@ -58,17 +58,17 @@ class ShipmentResource extends Resource
                         Section::make('Shipment Detail')
                             ->schema([
                                 TextEntry::make('shipment_number')
-                                    ->label('Shipment Number'),
+                                    ->label('AWB Number'),
                                 TextEntry::make('shipment_goods_name')
-                                    ->label('Shipment Goods'),
+                                    ->label('Goods Name'),
                                 TextEntry::make('shipment_sender')
-                                    ->label('Shipment Sender'),
+                                    ->label('Sender'),
                                 TextEntry::make('shipment_receiver')
-                                    ->label('Shipment Receiver'),
+                                    ->label('Receiver'),
                                 TextEntry::make('shipment_origin')
-                                    ->label('Shipment Origin'),
+                                    ->label('Origin'),
                                 TextEntry::make('shipment_destination')
-                                    ->label('Shipment Destination'),
+                                    ->label('Destination'),
                                 TextEntry::make('user.name'),
                                 TextEntry::make('latestHistory.shipment_status')
                                     ->label('Latest Shipment Status')
@@ -105,13 +105,19 @@ class ShipmentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('shipment_number')
+                    ->label('AWB Number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('shipment_goods_name')
+                    ->label('Goods Name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('shipment_sender'),
-                Tables\Columns\TextColumn::make('shipment_receiver'),
-                Tables\Columns\TextColumn::make('shipment_origin'),
-                Tables\Columns\TextColumn::make('shipment_destination'),
+                Tables\Columns\TextColumn::make('shipment_sender')
+                    ->label('Sender'),
+                Tables\Columns\TextColumn::make('shipment_receiver')
+                    ->label('Receiver'),
+                Tables\Columns\TextColumn::make('shipment_origin')
+                    ->label('Origin'),
+                Tables\Columns\TextColumn::make('shipment_destination')
+                    ->label('Destination'),
             ])
             ->filters([
                 //
