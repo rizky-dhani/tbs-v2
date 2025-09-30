@@ -33,7 +33,8 @@ class ShipmentHistoryRelationManager extends RelationManager
                         'on_transit' => 'On Transit',
                         'cancelled' => 'Cancelled',
                     ])
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull(),
                 Forms\Components\Textarea::make('shipment_details')
                     ->required()
                     ->columnSpanFull(),
