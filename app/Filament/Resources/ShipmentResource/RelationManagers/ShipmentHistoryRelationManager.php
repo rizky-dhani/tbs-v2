@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\ShipmentResource\RelationManagers;
 
-use App\Models\Shipment;
-use App\Models\ShipmentHistory;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use App\Models\Shipment;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use App\Models\ShipmentHistory;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class ShipmentHistoryRelationManager extends RelationManager
 {
@@ -22,6 +23,8 @@ class ShipmentHistoryRelationManager extends RelationManager
     {
         return $form
             ->schema([
+                Forms\Components\Hidden::make('shipmentHistoryId')
+                    ->default(fn() => (string) Str::orderedUuid()),
                 Forms\Components\Select::make('shipment_status')
                     ->options([
                         'pending' => 'Pending',
